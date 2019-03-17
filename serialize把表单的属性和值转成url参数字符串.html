@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script src="jquery.js"></script>
+</head>
+<body>
+	<P>用户名:</P>
+	<p><input type="text" name="username"></p>
+	<p>密码:</p>
+	<p><input type="text" name="password"></p>
+	<p><input type="button" value="ok"></p>	
+</body>
+<script>
+$(':button').click(function(){
+	str=$('form').serialize();
+	alert(str);
+});
+</script>
+</html>

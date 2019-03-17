@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script src="jquery.js"></script>
+</head>
+<body>
+	<div>
+		<img src="3.jpg">
+	</div>
+	<br>
+	<button>添加单击事件</button>
+	<button>删除单击事件</button>
+</body>
+<script>
+i=0;
+$('button').eq(0).click(function(){
+	$('img').bind('click',function(){  //bind绑定事件
+		if(i%2==0)
+		{
+			this.src="4.jpg";
+		}else{
+			this.src="3.jpg";
+		}
+		i++;
+	});
+});
+
+$('button').eq(1).click(function(){
+	$('img').unbind('click');    //unbind解除绑定事件
+});
+</script>
+</html>

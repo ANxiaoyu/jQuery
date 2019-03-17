@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script src="jquery.js"></script>
+<style>
+div{
+	height:200px;
+	background:#ccc;}
+</style>
+</head>
+<body>
+	<div class="div1">
+		<h3>0001</h3>
+		<h3>0002</h3>
+		<h3>0003</h3>
+		<h3>0004</h3>
+		<h3>0005</h3>
+	</div>
+	<hr>
+    <div class="div2">
+
+    </div>
+</body>
+<script>
+//内部插入
+$('.div1 h1').click(function(){
+	$('.div2').append($(this));//往div2里追加一个人
+
+	//$(this).appendTo('.div2'); //把一个人追加到div2里
+
+	//$('.div2').prepend($(this));//在div2里往前追加
+
+	//$(this).prependTo('.div2');
+});
+
+//外部插入
+$('.div1 h1').click(function(){
+	$('.div2').after($(this));//往div2后面追加一个人
+
+	//$(this).insertAfter('.div2'); //把一个人追加到div2后面
+
+	//$('.div2').before($(this));//往div2前面追加
+
+	//$(this).insertBefore('.div2');
+});
+</script>
+</html>

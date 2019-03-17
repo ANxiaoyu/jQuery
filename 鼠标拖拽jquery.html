@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script src="jquery.js"></script>
+</head>
+<body>
+	<div id="div1">
+		<img src="a.jpg">
+	</div>	
+</body>
+<script>
+	function drag(obj){
+		obj.bind("mousedown",start);
+
+		function start(event){
+			deltaX=event.clientX-obj.offset().left;
+		}
+	}
+</script>
+</html>
