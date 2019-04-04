@@ -1,0 +1,28 @@
+#boards{
+	margin-left:500px;
+	margin-top:160px;
+	padding-top:.2em;
+
+}
+table{
+	border:1px solid #000000;
+	
+	empty-cells:0;
+}
+th{
+	font-weight:600;
+	background-color:#F08080;
+	border:1px solid #000000;
+}
+
+td{ 
+	font-weight:normal;
+	border:1px dashed #000000;
+}
+th,td{
+	width:10em;
+	padding:.5em;
+}
+h1{
+	margin:auto;
+}

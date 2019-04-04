@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Boards 'R' Us</title>
+	<link rel="stylesheet" type="text/css" href="boards.css"/>
+	<script type="text/javascript" src="createRequest.js"></script>
+</head>
+<body>
+	<h1>Boards 'R' Us:: Custom Board Reports</h1>
+	<div id="boards">
+		<table>
+			<tr>
+				<th>Snowboards Sold</th>
+				<td><span id="boards-sold">1012</span></td>
+			</tr>
+			<tr>
+				<th>What I Sell 'em For</th>
+				<td>$<span id="price">249.95</span></td>
+			</tr>
+			<tr>
+				<th>What it Costs Me</th>
+				<td>$<span id="cost">84.22</span></td>
+			</tr>
+		</table>
+		<h2>Cash for the Slopes:
+			$<span id="cash">167718.76</span></h2>
+		<form method="GET" action="getUpdatedBoardSales-ajax.php">
+			<input value="Show Me the Money" type="submit"/>
+		</form>
+	</div>
+</body>
+</html>
