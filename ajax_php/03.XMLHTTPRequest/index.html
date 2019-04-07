@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="发送请求报文">   
+</body>
+</html>
+<script>
+    //绑定点击事件
+    document.querySelector('input').onclick=function(){
+        //创建对象 异步对象
+        var xhr=new XMLHTTPRequest();
+
+        //请求行
+        xhr.open('get','xxx.php');
+
+        //请求头 setRequestHeader
+        //参数1 键名
+        //参数2 值
+        xhr.setRequestHeader('heima','goodgoodstudy');
+
+        //请求主体 发送
+        xhr.send(null);
+    }
+</script>

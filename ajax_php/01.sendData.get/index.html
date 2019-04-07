@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>get提交数据</h2>
+    <!--
+        get方式提交数据 总结：
+        1.数据是拼接在url中
+        2.数据的安全性不好
+        3.数据的长度问题
+          3.1 理论上来说url的长度 是可以任意修改的
+          3.2 有一些浏览器会限制url的长度，有一些服务器对于长度太长的url直接就屏蔽了
+        4.测试方便
+    -->
+    <form action="./getData.php">
+        <input name="food" type="text" placeholder="你喜欢吃的食物">
+        <input name="doType" type="text" placeholder="爱吃的做法">
+        <input type="submit">
+    </form>
+</body>
+</html>
