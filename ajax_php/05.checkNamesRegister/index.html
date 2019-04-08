@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <h2>用户注册</h2>
+   <h3>状态</h3>
+   <input type="text" palceholder="请输入名字"> 
+</body>
+</html>
+<script>
+    //点击事件
+    document.querySelector('input').onclick=function(){
+        //0.修改页面的提示信息
+        document.querySelector('h3').innerHTML="验证中";
+        //1.创建对象
+        var xhr=new XMLHttpRequest();
+        //2.设置请求行(get请求数据写在url后面)
+        xhr.open('get','checkName.php?name='+this.value);
+       //3.设置请求头（get请求可以省略，post不发送数据也可以省略）
+       //xhr.setRequestHeader();
+
+      //3.1 注册回调函数
+        xhr.onload=function(){
+            //获取数据
+          console.log(xhr.responseText);
+            //修改页面的dom元素
+          document.querySelector('h2').innerHTML=xhr.responseText;
+          document.querySelector('h3').innerHTML="验证完成";
+        }
+      
+        //4.请求主体发送（get请求为空，或者写null,post请求数据写在这里，如果没有数据，直接为空或者写null）
+        xhr.send(null); 
+    }
+    
+
+</script>
