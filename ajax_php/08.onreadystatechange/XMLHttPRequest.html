@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>异步对象</h2>
+    <input type="button" value='ajax请求'>
+    <input type="button" class="lastBtn" value="ajax请求2">
+</body>
+</html>
+<script>
+    /*
+        异步对象：同时可以做很多事情
+        同步对象：一件事一件事的做    
+    */
+   document.querySelector('input').onclick=function(){
+       //1.创建异步对象
+       var xhr=new XMLHttpRequest();
+       //2.设置请求行
+       //参数3 是否使用异步 默认是true. false(同步)
+       //同步 请求响应回来之前 什么事都干不了
+       //基本上 不会使用同步这个模式
+       xhr.open('get','xxx.php',true);
+       //3.设置请求头
+       //4.注册回调函数
+       xhr.onload=function(){
+           console.log(xhr.responseText);
+       }
+       //5.请求主体发送
+       xhr.send(null);
+   }
+
+
+   document.querySelector('.lastBtn').onclick=function(){
+       //1.创建异步对象
+       var xhr=new XMLHttpRequest();
+       //2.设置请求行
+       xhr.open('get','xxx.php',true);
+       //3.设置请求头
+
+       //4.注册回调函数
+       //触发的次数很多
+       //状态改变时会触发
+       xhr.onreadystatechange=function(){
+            //只有当状态码是4时，采取获取数据
+            console.log(xhr.status);
+            //判断 响应回来 并且请求的页面存在 采取获取数据
+            if(xhr.readyState==4 && xhr.status==200){
+                console.log('触发了');
+                console.log(xhr.readyState);
+                console.log(xhr.responseText);
+            }
+       }
+       //5.请求主体发送
+       xhr.send(null);
+   }
+</script>
