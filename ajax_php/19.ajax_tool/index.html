@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用封装好的ajax</title>
+</head>
+<body>
+    <h2>测试工具函数</h2>
+    <input type="button" class="get" value='测试get'>
+    <input type="button" class="post" value="测试post">
+    <input type="button" class="ajax_test" value="测试ajax_test">
+    <input type="button" class="ajax" value="测试ajax">
+    <input type="button" class="json" value="获取json">
+    <input type="button" class="xml" value="获取xml">
+</body>
+</html>
+<!--导入js-->
+<script src="./ajax.js"></script>
+
+<script>
+//get请求
+document.querySelector('.get').onclick=function(){
+    //直接调用get方法
+    get('../00.backData/backSendData.php','name=jack&friend=rose',function(data){
+        console.log(data);
+    })
+}
+
+//post请求
+document.querySelector('.post').onclick=function(){
+    post('../00.backData/backSendData.php','name=rose&frien=qingqjiao',function(data){
+        console.log(data);
+    })
+}
+
+//ajax自选get post
+document.querySelector('.ajax_test').onclick=function(){
+    // ajax_test('../00.backData/backSendData.php','get','name=轰总&food=冰',function(data){
+    //     alert('轰总');
+    //     alert(data);
+    // })
+
+    ajax_test('../00.backData/backSendData.php','post','name=轰总&food=冰',function(data){
+        alert('轰总');
+        alert(data);
+    })
+}
+
+//ajax 只传一个参数
+document.querySelector('.ajax').onclick=function(){
+    ajax({
+        url:'../00.backData/backSendData.php',
+        data:'轰焦冻',
+        type:'get',
+        success:function(data){
+            document.body.innerHTML=data;
+        }
+    });
+}
+
+//获取json 
+document.querySelector('.json').onclick=funtion(){
+    ajax({
+        type:'get',
+        url:'../00.backData/backJSON.php',
+        success:function(data){
+            console.log(data);
+        }
+    })
+}
+
+//获取xml
+document.querySelector('.xml').onclick=function(){
+    ajax({
+        type:'post',
+        url:'../00.backData/backXML.php',
+        success:function(data){
+            console.log(data);
+        }
+    })
+}
+</script>
