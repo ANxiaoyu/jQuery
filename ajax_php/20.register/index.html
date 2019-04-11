@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册用户</title>
+    <link rel="stylesheet" href="./css/init.css">
+    <link rel="stylesheet" href="./css/register.css">
+    <style>
+    .sub.disabled{
+        background:gray !important;
+        cursor: not-allowed !important;
+    }
+    .cover{
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height: 100%;
+        background:url('images/loading.gif') no-repeat center,gray;
+        opacity: .7;
+        display: none;
+    }
+    .tips{
+        position:absolute;
+        font-size: 20px;
+        transform: translateY(-10px);
+        display: none;
+    }
+    </style>
+</head>
+<body>
+    <div id="bg"><img src="./images/wallpaper.jpg" alt=""></div>
+    <div id="register">
+        <div class="logo"><a href="./index.html"></a></div>
+        <div class="box">
+            <div class="regform">
+                <h2>工具函数实现版本</h2>
+                <form action="" method="post">
+                    <table>
+                        <tr>
+                            <td>用户名:</td>
+                            <td><input type="text" class="inputName" name="" value=""></td>
+                            <td>
+                                <span class="tips">占位文本</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan='3' aling="center"><input type="button" class="sub disabled" value="注册"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="quickreg">
+                <h2>快速注册</h2>
+                <div class="apps">
+                    <a href="javascript:void(0)" class="qq"></a>
+                    <a href="javascript:void(0)" class="sina"></a>
+                    <a href="javascript:void(0)" class="taobao"></a>
+                    <a href="javascript:void(0)" class="tent"></a>
+                    <a href="javascript:void(0)" class="douban"></a>
+                </div>
+                <div class="nowlog"><a href="./login.html">已有账号,现在去登录!</a></div>
+            </div>
+        </div>
+    </div>
+    <!--底部-->
+    <div id="footer">
+        <div class="copy">
+            <p>网站开发测试中……</p>
+            <p>版权所有 爱旅行 www.ailvxing.cc</p>
+        </div>
+    </div>
+    <div class="cover"></div>
+</body>
+</html>
+<script src="./js/ajax.js"></script>
+<script src="./js/jquery-1.12.4.min.js"></script>
+
+<!--
+    需求
+    需求1：
+    失去焦点
+        开启遮罩层 --cover
+        --ajax验证用户名
+            文本框--inputName
+            调用验证用户名接口
+    请求回来之后
+        关闭遮罩层
+        修改文本框之后的提示 --tips
+        延迟一会之后消失
+    需求2：
+    按钮根据是否可以注册 变绿
+    可以->变绿
+    不可以->不变
+    需求3：
+    点击注册按钮
+        弹出遮罩层
+        --注册--ajax--接口文档
+    请求回来之后
+        关闭遮罩层
+        信息设置给 提示tips
+    需求4：
+    注册按钮 不能一直点
+    当注册按钮 有disabled这个类 就不能点
+        判断类名
+        提示用户
+        阻断后续代码执行
+    反之可以点
+    需求5：
+    注册成功之后
+        禁用按钮的点击
+            添加类名
+-->
+<script>
+    $(function(){
+        //需求1
+        $('.inputName').blur(function(){
+            $('.cover').show();
+            //发送请求
+            ajax({
+                type:'get',
+                url:'api/check.php',
+                data:'name='+$('.inputName').val(),
+                success:function(data){
+                    console.log(data);
+                    $('.cover').hide();
+                    //delay让后面的动画 延迟一会调用
+                    $('.tips').html(data.message).fadeIn(1000).delay(2000).fadeOut();
+                    //如果可以注册 删除类名即可
+                    if(data.status=='can'){
+                        $('.sub').removeClass('disabled');
+                    }
+                }
+            })
+        })
+
+        //需求3
+        $('.sub').click(function(){
+            if($(this).hasClass('disabled')==true){
+                alert('哥们，别点了');
+                return;
+            }
+            $('.cover').show();
+            ajax({
+                url:'api/register.php',
+                type:'post',
+                data:'name='+$('.inputName').val(),
+                success:function(data){
+                    $('.cover').hide();
+                    $('.tips').html(data).fadeIn(1000).delay(1000).fadeOut(1000);
+                    //添加禁用的类名即可
+                    $('.sub').addClass('disabled');
+                }
+            })
+        })
+    })
+</script>
