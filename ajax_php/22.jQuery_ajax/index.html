@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>jQuery的ajax</h2>
+    <input type="button" class="get" value='get请求'>
+    <input type="button" class="post" value="post请求">
+    <input type="button" class="ajax" value='ajax请求'>
+    <input type="button" class="ajax_extend" value="$.ajax使用补充">
+</body>
+</html>
+<!--导入jQuery-->
+<script src="./js/jquery-1.12.4.min.js"></script>
+<script>
+//自己的js
+    //get请求
+    $('.get').click(function(){
+        // $.get('../00.backData/backSendData.php','name=rose&husband=robot',function(data){
+        //     alert(data);
+        // })
+
+        //支持传入js对象
+        $.get('../00.backData/backSendData.php',{name:'轰焦冻',skill:'冻结和烈火'},function(data){
+            alert(data);
+        })
+    })
+
+    //post请求
+    $('.post').click(function(){
+        //支持传入js对象
+        $.post('../00.backData/backSendData.php',{name:'小胜',skill:'爆破'},function(data){
+            alert(data);
+        })
+    })
+
+    //可以自己选择 get 还是post
+    $('.ajax').click(function(){
+        $.ajax({
+            url:'../00.backData/backXML.php',
+            // type:'post',
+            // data:'momoda',
+            success:function(data){
+                console.log(data);
+            }
+        })
+    })
+
+    //$.ajax使用补充
+    $('.ajax_extend').click(function(){
+        /*
+            type
+                如果不设置，默认的请求方法时？ get
+                如果用get请求 那么 可以不写type属性
+            success
+                在请求成功才会触发
+                如果出现 服务器告诉浏览器返回的类型 跟 jQuery内部实际转换的类型不匹配 会无法触发
+            error
+                当请求出现问题 会触发这个回调函数
+            complete
+                请求完成会触发（不管success还是error）
+        */
+       $.ajax({
+           url:'../00.backData/backJSON.php',
+           success:function(data){
+               console.log(data);
+           },
+           //形参可以改变名字 这里直接使用默认的即可
+           //参数1 异步对象
+           //参数2 错误信息
+           //参数3 错在哪里
+           error:function(XMLHttpRequest,textStatus,errorThrown){
+                console.log('失败了哦');
+                console.log(XMLHttpRequest);
+                console.log(textStatus);
+                console.log(errorThrown);
+           },
+           complete:function(){
+               console.log('请求完成了');
+           }
+       })
+    })
+</script>
