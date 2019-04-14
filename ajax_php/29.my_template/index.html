@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>自己实现模板引擎</h2>
+</body>
+</html>
+<!--
+    模板引擎原理
+        通过id 获取 模板中的 内容==>字符串
+        调用方式时
+            找到字符串中 特殊的符号{{name}}==>正则表达式
+            使用对象对应的属性 进行替换
+        返回字符串
+-->
+<script id='template' type="text/html">
+    <ul>
+        <li>{{name}}</li>
+        <li>{{skill}}</li>
+    </ul>
+</script>
+<!--引入模板引擎-->
+<script src='./my_template.js'></script>
+<script>
+    /*
+    //模板引擎 template（模板id，数据）==>字符串
+    //1。获取模板中的内容通过id
+    var str=document.querySelector('#template').innerHTML;
+
+    //2.准备对象
+    var data={
+        name:'轰总',
+        skill:'冻结'
+    }
+    //3.检索满足条件的部分
+    var reg=/{{(\w+)}}/;
+    var result=reg.exec(str);
+    console.log(result);
+
+    //4.替换模板中的内容
+    console.log(str);
+    str=str.replace(result[0],data[result[1]]);
+    console.log(str);
+
+    //再次检索 替换
+    var result=reg.exec(str);
+    console.log(result);
+    str=str.replace(result[0],data[result[1]]);
+    console.log(str);
+
+    console.log(reg.exec(str));
+    //到底与几个坑 我们能不能确定
+    //替换几次 能不能确定
+    //但是每次替换的代码是一样 次数不确定
+    //while循环
+    //停止的条件是 再也找不到结果了
+*/
+
+//使用while循环优化
+//数据
+/*
+    var data={
+        name:'轰总',
+        skill:'冻结'
+    }
+    //字符串
+    var str=document.querySelector('#template').innerHTML;
+    //定义正则
+    var reg=/{{(\w+)}}/;
+    //循环替换 直到为null结束
+    var result=reg.exec(str);
+    while(result){
+        //替换
+        str=str.replace(result[0],data[result[1]]);
+        //再次检索
+        result=reg.exec(str);
+    }
+    //获取结果
+    console.log(str);
+    */
+
+    //使用自己的封装的模板引擎
+    //准备数据
+    //调用模板引擎
+    var data={
+        name:'轰焦冻',
+        skill:'冻结'
+    }
+    var resultString=my_template('template',data);
+    console.log(resultString);
+
+</script>
