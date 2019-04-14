@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .cover {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: skyblue;
+            opacity: .5;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>jQuery_ajax使用补充</h2>
+    <input type="button" class="json" value="获取JSON">
+    <input type="button" class="xml" value="获取XML">
+    <div class="cover"></div>
+</body>
+</html>
+<script src="./jquery-1.12.4.min.js"></script>
+<!--  
+    遮罩层
+       开启 发送请求时
+       关闭 请求回来时
+  -->
+  <script>
+      $(function(){
+          $('.json').click(function(){
+              //开启
+              $.ajax({
+                  url:'../00.backData/backJSON.php',
+                  success:function(data){
+                      console.log(data);
+                      //关闭
+                  },
+                  //人为的指定 返回的数据格式
+                  dataType:'json'
+              })
+          })
+          $('.xml').click(function(){
+              //开启
+              $.ajax({
+                  url:'../00.backData/backXML.php',
+                  success:function(data){
+                      console.log(data);
+                      //关闭
+                  },
+                  //人为的指定 返回的数据格式
+                  dataType:'xml'
+              })
+          })
+      })
+
+      //jquery_ajax使用补充部分
+      $(document).ajaxStart(function(){
+          $('.cover').show();
+      });
+      $(document).ajaxComplete(function(){
+          $('.cover').hide();
+      });
+  </script>
