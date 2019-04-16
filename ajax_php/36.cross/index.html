@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cross跨域访问</title>
+</head>
+<body>
+    <input type="button" value="跨域访问">
+</body>
+</html>
+<script>
+    document.querySelector('input').onclick=function(){
+        var xhr=new XMLHttpRequest();
+        xhr.open('get','http://192.168.70.78/2017-8-17/11.cross/backData.php');
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4 && xhr.status==200){
+                console.log(xhr.responseText);
+            }
+        }
+        xhr.send(null);
+    }
+</script>

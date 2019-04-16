@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSONP接口使用</title>
+</head>
+<body>
+    <h2>JSONP接口使用</h2>
+</body>
+</html>
+<script src="./js/jquery-1.12.4.min.js"></script>
+<!--
+    同源
+        协议、域名（地址）、端口号 相同
+    不同源
+        上面三者中有一样不同 则为不同源
+    跨域
+        不同源的网站之间 互相发送请求
+
+-->
+<script>
+    $(function(){
+        $('h2').click(function(){
+            $.ajax({
+                url:'https://api.asliu.com/phone',
+                data:{
+                    phone:'13666666666'
+                },
+                success:function(data){
+                    console.log(data);
+                },
+                //dataType:'jsonp'
+            })
+        })
+    })
+</script>
